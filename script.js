@@ -15,7 +15,23 @@
   })
 
   cw1.addEventListener("click", function () {
-    //TODO
+    fetch('https://jsonplaceholder.typicode.com/posts')
+      .then(response => response.json())
+      .then(posts => {
+        let html = '<div class="posts">'
+        posts.forEach(p => {
+          html += `<div class="post">
+                      <h3>${p.title}</h3>
+                      <p>${p.body}</p>
+                      <div class="meta">ID: ${p.id} | userId: ${p.userId}</div>
+                   </div>`
+        })
+        html += '</div>'
+        answer.innerHTML = html
+      })
+      .catch(err => {
+        answer.innerHTML = 'Błąd: ' + err
+      })
   })
 
   cw2.addEventListener("click", function () {
